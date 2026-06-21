@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vagabond — Don't book a room. Book your freedom.</title>
+<meta name="description" content="Luxury camper van journeys through the Alps, the Mediterranean coast and beyond. Wake up somewhere new every day. Choose a route and go.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f5f0;
+    --paper-soft:#fbfaf7;
+    --ink:#1b2420;
+    --ink-soft:#465048;
+    --moss:#4b5d4f;
+    --moss-deep:#2f3c33;
+    --amber:#d99a4e;
+    --amber-soft:#eccf9d;
+    --clay:#a85c3f;
+    --night:#10161a;
+    --night-soft:#1a2329;
+    --glass:rgba(255,255,255,0.5);
+    --glass-border:rgba(255,255,255,0.65);
+    --glass-dark:rgba(16,22,26,0.35);
+    --r-lg:28px;
+    --r-md:18px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%;}
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  .label{
+    font-family:'Space Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:12px;
+    font-weight:700;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  section{position:relative;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s var(--ease), transform 1s var(--ease);}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  .reveal-delay-1.is-visible{transition-delay:.12s;}
+  .reveal-delay-2.is-visible{transition-delay:.24s;}
+  .reveal-delay-3.is-visible{transition-delay:.36s;}
+  .reveal-delay-4.is-visible{transition-delay:.48s;}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* ---------- top nav ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:26px 6vw;
+    transition:background .5s var(--ease), padding .5s var(--ease), backdrop-filter .5s var(--ease);
+  }
+  .nav.scrolled{
+    background:rgba(247,245,240,0.78);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    padding:16px 6vw;
+    box-shadow:0 1px 0 rgba(27,36,32,0.06);
+  }
+  .nav .logo{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+    font-size:22px;color:var(--paper-soft);letter-spacing:0.01em;
+    transition:color .5s var(--ease);
+  }
+  .nav.scrolled .logo{color:var(--ink);}
+  .nav-links{display:flex;gap:36px;align-items:center;}
+  .nav-links a{
+    font-size:13px;letter-spacing:0.04em;color:var(--paper-soft);opacity:.92;
+    transition:color .5s var(--ease), opacity .3s;
+  }
+  .nav.scrolled .nav-links a{color:var(--ink-soft);}
+  .nav-links a:hover{opacity:.6;}
+  .nav-cta{
+    padding:10px 22px;border-radius:999px;
+    background:var(--glass);border:1px solid var(--glass-border);
+    backdrop-filter:blur(8px);
+    font-size:13px;color:var(--paper-soft)!important;
+    transition:all .35s var(--ease);
+  }
+  .nav.scrolled .nav-cta{background:var(--ink);color:var(--paper)!important;border-color:var(--ink);}
+  .nav-cta:hover{transform:translateY(-1px);opacity:.92;}
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100vh;min-height:680px;position:relative;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    color:#fff;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background-image:url('https://images.unsplash.com/photo-1455496231601-e6195da1f841?q=80&w=2400&auto=format&fit=crop');
+    background-size:cover;background-position:center 60%;
+    transform:scale(1.08);
+    will-change:transform;
+  }
+  .hero-veil{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(16,22,26,0.18) 0%, rgba(16,22,26,0.05) 38%, rgba(16,22,26,0.55) 100%);
+  }
+  .hero-content{
+    position:relative;z-index:2;padding:0 6vw 64px;
+    max-width:920px;
+  }
+  .hero .label{color:var(--amber-soft);display:block;margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(40px,7vw,84px);
+    font-style:italic;
+    margin-bottom:22px;
+    text-shadow:0 4px 28px rgba(0,0,0,0.18);
+  }
+  .hero h1 em{font-style:normal;color:var(--amber-soft);}
+  .hero p.sub{
+    font-size:clamp(16px,2vw,20px);
+    max-width:560px;color:rgba(255,255,255,0.88);
+    margin-bottom:38px;font-weight:300;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:18px 34px;border-radius:999px;
+    background:var(--ink);color:var(--paper);
+    font-family:'Space Mono',monospace;font-size:13px;
+    letter-spacing:0.08em;text-transform:uppercase;
+    border:1px solid var(--ink);
+    cursor:pointer;transition:all .4s var(--ease);
+  }
+  .btn:hover{background:var(--amber);border-color:var(--amber);color:var(--night);transform:translateY(-2px);}
+  .btn-ghost{
+    background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.55);
+    backdrop-filter:blur(6px);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.16);border-color:#fff;color:#fff;}
+  .btn svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+  .btn:hover svg{transform:translateX(4px);}
+
+  .hero-stats{
+    position:relative;z-index:2;
+    display:flex;flex-wrap:wrap;gap:14px;
+    padding:0 6vw 48px;
+  }
+  .stat-pill{
+    background:var(--glass);border:1px solid var(--glass-border);
+    backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-radius:999px;padding:14px 24px;
+    display:flex;align-items:baseline;gap:8px;color:#fff;
+  }
+  .stat-pill b{font-family:'Fraunces',serif;font-size:20px;font-weight:600;}
+  .stat-pill span{font-size:12px;color:rgba(255,255,255,0.78);font-family:'Space Mono',monospace;letter-spacing:0.03em;}
+
+  .scroll-cue{
+    position:absolute;bottom:26px;right:6vw;z-index:2;color:#fff;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.12em;
+    opacity:.8;
+  }
+  .scroll-line{width:1px;height:46px;background:linear-gradient(180deg,rgba(255,255,255,0.9),transparent);
+    animation:scrollPulse 2.2s ease-in-out infinite;}
+  @keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:.8;}50%{transform:scaleY(0.5);opacity:.3;}}
+
+  /* ---------- container/section helpers ---------- */
+  .wrap{max-width:1320px;margin:0 auto;padding:0 6vw;}
+  .section-head{max-width:680px;margin-bottom:64px;}
+  .section-head .label{color:var(--clay);margin-bottom:16px;display:block;}
+  .section-head h2{font-size:clamp(32px,4.4vw,52px);color:var(--ink);}
+  .section-head h2 em{font-style:italic;color:var(--moss-deep);}
+  .section-head p{margin-top:18px;color:var(--ink-soft);font-size:17px;max-width:520px;}
+  .pad{padding:140px 0;}
+  @media (max-width:760px){ .pad{padding:90px 0;} .section-head{margin-bottom:44px;} }
+
+  /* ---------- 02 destinations ---------- */
+  .dest-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  }
+  .dest-card{
+    position:relative;height:480px;border-radius:var(--r-lg);overflow:hidden;
+    cursor:pointer;isolation:isolate;
+  }
+  .dest-card img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform 1.1s var(--ease);
+    transform:scale(1.0);
+  }
+  .dest-card:hover img{transform:scale(1.08);}
+  .dest-card::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(16,22,26,0) 35%, rgba(16,22,26,0.78) 100%);
+    transition:opacity .4s;
+  }
+  .dest-info{
+    position:absolute;left:28px;right:28px;bottom:28px;z-index:2;color:#fff;
+  }
+  .dest-info .label{color:var(--amber-soft);display:block;margin-bottom:8px;opacity:0;transform:translateY(8px);
+    transition:all .4s var(--ease);}
+  .dest-card:hover .dest-info .label{opacity:1;transform:translateY(0);}
+  .dest-info h3{font-size:30px;font-style:italic;font-weight:500;}
+  .dest-info p{
+    font-size:14px;color:rgba(255,255,255,0.85);margin-top:8px;max-width:340px;
+    max-height:0;opacity:0;overflow:hidden;transition:max-height .45s var(--ease), opacity .35s var(--ease);
+  }
+  .dest-card:hover .dest-info p{max-height:80px;opacity:1;}
+  @media (max-width:880px){ .dest-grid{grid-template-columns:1fr;} .dest-card{height:380px;} }
+
+  /* ---------- 03 storytelling gallery ---------- */
+  .story-rail{
+    display:flex;gap:22px;overflow-x:auto;padding:8px 6vw 28px;
+    scroll-snap-type:x proximity;
+    scrollbar-width:none;
+  }
+  .story-rail::-webkit-scrollbar{display:none;}
+  .story-card{
+    position:relative;flex:0 0 auto;scroll-snap-align:start;
+    border-radius:var(--r-md);overflow:hidden;
+  }
+  .story-card img{height:560px;width:auto;object-fit:cover;}
+  .story-card:nth-child(odd){height:560px;}
+  .story-card.tall img{height:560px;}
+  .story-card.wide img{width:560px;height:560px;}
+  .story-cap{
+    position:absolute;left:18px;bottom:18px;color:#fff;z-index:2;
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:0.05em;
+    background:rgba(16,22,26,0.38);backdrop-filter:blur(8px);
+    padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);
+  }
+  @media (max-width:760px){ .story-card img, .story-card.wide img{height:420px;width:340px;} }
+
+  /* ---------- 04 routes ---------- */
+  .routes-grid{display:flex;flex-direction:column;gap:26px;}
+  .route-card{
+    display:grid;grid-template-columns:1.1fr 1fr;
+    border-radius:var(--r-lg);overflow:hidden;background:var(--paper-soft);
+    border:1px solid rgba(27,36,32,0.07);
+    min-height:420px;
+  }
+  .route-card:nth-child(even){grid-template-columns:1fr 1.1fr;}
+  .route-card:nth-child(even) .route-photo{order:2;}
+  .route-photo{position:relative;overflow:hidden;}
+  .route-photo img{width:100%;height:100%;object-fit:cover;min-height:420px;transition:transform 1.2s var(--ease);}
+  .route-card:hover .route-photo img{transform:scale(1.05);}
+  .route-stamp{
+    position:absolute;top:22px;left:22px;
+    background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);
+    border-radius:999px;padding:8px 16px;color:#fff;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.08em;
+    transform:rotate(-3deg);
+  }
+  .route-body{padding:48px;display:flex;flex-direction:column;justify-content:center;gap:18px;}
+  .route-meta{display:flex;gap:24px;}
+  .route-meta div{font-family:'Space Mono',monospace;}
+  .route-meta b{display:block;font-size:18px;color:var(--ink);font-family:'Fraunces',serif;}
+  .route-meta span{font-size:11px;letter-spacing:0.1em;color:var(--ink-soft);text-transform:uppercase;}
+  .route-body h3{font-size:34px;font-style:italic;color:var(--ink);}
+  .route-body p{color:var(--ink-soft);font-size:15.5px;max-width:460px;}
+  .route-link{
+    display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;
+    font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--moss-deep);
+    margin-top:6px;width:fit-content;border-bottom:1px solid currentColor;padding-bottom:4px;
+  }
+  @media (max-width:880px){
+    .route-card, .route-card:nth-child(even){grid-template-columns:1fr;}
+    .route-card:nth-child(even) .route-photo{order:0;}
+    .route-photo img{min-height:280px;}
+    .route-body{padding:32px;}
+  }
+
+  /* ---------- 05 interior collage ---------- */
+  .home-section{background:var(--moss-deep);color:var(--paper);}
+  .home-section .section-head .label{color:var(--amber-soft);}
+  .home-section .section-head h2{color:#fff;}
+  .home-section .section-head h2 em{color:var(--amber-soft);}
+  .home-section .section-head p{color:rgba(247,245,240,0.78);}
+  .collage{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:240px 240px;gap:18px;
+  }
+  .collage img{width:100%;height:100%;object-fit:cover;border-radius:var(--r-md);}
+  .collage .c1{grid-column:1/3;grid-row:1/3;}
+  .collage .c1 img{height:100%;}
+  .collage .c2{grid-column:3/5;grid-row:1/2;}
+  .collage .c3{grid-column:3/4;grid-row:2/3;}
+  .collage .c4{grid-column:4/5;grid-row:2/3;}
+  @media (max-width:880px){
+    .collage{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,200px);}
+    .collage .c1{grid-column:1/3;grid-row:1/2;}
+    .collage .c2{grid-column:1/2;grid-row:2/3;}
+    .collage .c3{grid-column:2/3;grid-row:2/3;}
+    .collage .c4{grid-column:1/3;grid-row:3/4;}
+  }
+
+  /* ---------- 06 week timeline ---------- */
+  .timeline{position:relative;}
+  .timeline-line{
+    position:absolute;left:84px;top:0;bottom:0;width:1px;
+    background:repeating-linear-gradient(to bottom, var(--clay) 0 8px, transparent 8px 16px);
+    transform-origin:top;transform:scaleY(0);transition:transform 1.6s var(--ease);
+  }
+  .timeline-line.is-visible{transform:scaleY(1);}
+  .day-row{
+    display:grid;grid-template-columns:84px 1fr;gap:36px;
+    padding:36px 0;align-items:center;
+  }
+  .day-num{
+    font-family:'Space Mono',monospace;font-size:13px;color:var(--clay);
+    display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;
+  }
+  .day-dot{width:11px;height:11px;border-radius:50%;background:var(--clay);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--clay);}
+  .day-card{
+    display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center;
+    background:var(--paper-soft);border:1px solid rgba(27,36,32,0.07);border-radius:var(--r-md);
+    padding:18px;
+  }
+  .day-card img{width:200px;height:160px;object-fit:cover;border-radius:14px;}
+  .day-card h3{font-size:22px;font-style:italic;color:var(--ink);margin-bottom:8px;}
+  .day-card p{color:var(--ink-soft);font-size:14.5px;}
+  @media (max-width:760px){
+    .day-row{grid-template-columns:40px 1fr;gap:18px;}
+    .timeline-line{left:39px;}
+    .day-card{grid-template-columns:1fr;}
+    .day-card img{width:100%;height:180px;}
+  }
+
+  /* ---------- 07 travel gallery (instagram grid) ---------- */
+  .ig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .ig-card{
+    position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:4/5;
+  }
+  .ig-card img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+  .ig-card:hover img{transform:scale(1.06);}
+  .ig-overlay{
+    position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:18px;
+    background:linear-gradient(180deg, transparent 50%, rgba(16,22,26,0.85) 100%);color:#fff;
+  }
+  .ig-overlay .name{font-family:'Fraunces',serif;font-style:italic;font-size:18px;}
+  .ig-overlay .country{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--amber-soft);text-transform:uppercase;margin:4px 0 6px;}
+  .ig-overlay .quote{font-size:13px;color:rgba(255,255,255,0.85);}
+  @media (max-width:880px){ .ig-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- 08 benefits ---------- */
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(27,36,32,0.1);border-radius:var(--r-lg);overflow:hidden;}
+  .benefit{background:var(--paper-soft);padding:44px 38px;display:flex;flex-direction:column;gap:18px;}
+  .benefit-icon{width:42px;height:42px;color:var(--clay);}
+  .benefit h3{font-size:20px;font-style:italic;color:var(--ink);}
+  .benefit p{color:var(--ink-soft);font-size:14.5px;}
+  @media (max-width:880px){ .benefits-grid{grid-template-columns:1fr;} }
+
+  /* ---------- 09 availability ---------- */
+  .avail-section{background:var(--night);color:var(--paper);}
+  .avail-section .section-head h2{color:#fff;}
+  .avail-section .section-head h2 em{color:var(--amber-soft);}
+  .avail-section .section-head p{color:rgba(247,245,240,0.65);}
+  .avail-section .section-head .label{color:var(--amber-soft);}
+  .avail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .avail-card{
+    border:1px solid rgba(247,245,240,0.14);border-radius:var(--r-md);
+    padding:36px;background:rgba(247,245,240,0.04);
+    backdrop-filter:blur(6px);transition:border-color .3s, background .3s;
+  }
+  .avail-card:hover{border-color:rgba(217,154,78,0.6);background:rgba(217,154,78,0.06);}
+  .avail-card .month{font-family:'Fraunces',serif;font-style:italic;font-size:30px;margin-bottom:14px;}
+  .avail-bar{height:5px;border-radius:4px;background:rgba(247,245,240,0.14);overflow:hidden;margin-bottom:14px;}
+  .avail-bar span{display:block;height:100%;background:var(--amber);border-radius:4px;}
+  .avail-card p{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:0.04em;color:rgba(247,245,240,0.75);}
+  .avail-card .urgent{color:var(--amber-soft);}
+  @media (max-width:880px){ .avail-grid{grid-template-columns:1fr;} }
+
+  /* ---------- 10 final cta ---------- */
+  .final{
+    height:100vh;min-height:620px;position:relative;display:flex;align-items:center;justify-content:center;
+    text-align:center;color:#fff;overflow:hidden;
+  }
+  .final-bg{
+    position:absolute;inset:0;
+    background-image:url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2400&auto=format&fit=crop');
+    background-size:cover;background-position:center;transform:scale(1.1);will-change:transform;
+  }
+  .final-veil{position:absolute;inset:0;background:linear-gradient(180deg, rgba(16,22,26,0.55), rgba(16,22,26,0.35) 50%, rgba(16,22,26,0.7));}
+  .final-content{position:relative;z-index:2;max-width:780px;padding:0 6vw;}
+  .final h2{font-size:clamp(30px,5vw,58px);font-style:italic;margin-bottom:22px;text-shadow:0 4px 30px rgba(0,0,0,.2);}
+  .final p{font-size:clamp(15px,1.8vw,19px);color:rgba(255,255,255,0.85);margin-bottom:40px;font-weight:300;}
+  .final .btn{padding:20px 44px;font-size:14px;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:rgba(247,245,240,0.6);padding:64px 6vw 32px;}
+  .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;padding-bottom:40px;border-bottom:1px solid rgba(247,245,240,0.12);}
+  .foot-logo{font-family:'Fraunces',serif;font-style:italic;font-size:24px;color:#fff;}
+  .foot-links{display:flex;gap:48px;flex-wrap:wrap;}
+  .foot-links h4{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,245,240,0.4);margin-bottom:14px;}
+  .foot-links li{margin-bottom:8px;font-size:14px;}
+  .foot-links a:hover{color:#fff;}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:12px;flex-wrap:wrap;gap:10px;}
+
+  ::selection{background:var(--amber);color:var(--night);}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="logo">Vagabond</div>
+  <div class="nav-links">
+    <a href="#destinations">Destinations</a>
+    <a href="#routes">Routes</a>
+    <a href="#week">Itinerary</a>
+    <a href="#availability">Availability</a>
+  </div>
+  <a href="#availability" class="nav-cta">Choose a route</a>
+</nav>
+
+<!-- 1. HERO -->
+<header class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-veil"></div>
+  <div class="hero-content">
+    <span class="label reveal is-visible">Vagabond &mdash; camper journeys</span>
+    <h1 class="reveal is-visible">Don't book a room.<br><em>Book your freedom.</em></h1>
+    <p class="sub reveal is-visible reveal-delay-1">Wake up today by the lake, tomorrow in the mountains, and a week later by the sea.</p>
+    <a href="#availability" class="btn reveal is-visible reveal-delay-2">
+      Choose a route
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-pill reveal is-visible reveal-delay-2"><b>1,500+</b><span>trips taken</span></div>
+    <div class="stat-pill reveal is-visible reveal-delay-3"><b>4.9</b><span>guest rating</span></div>
+    <div class="stat-pill reveal is-visible reveal-delay-4"><b>24/7</b><span>road support</span></div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><div class="scroll-line"></div></div>
+</header>
+
+<!-- 2. DESTINATIONS -->
+<section class="pad" id="destinations">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">02 &mdash; tomorrow's view</span>
+      <h2>Where would you<br><em>wake up tomorrow?</em></h2>
+      <p>Every morning is a new postcard. Pick the world you want to open your eyes to.</p>
+    </div>
+    <div class="dest-grid">
+      <div class="dest-card reveal">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop" alt="Alpine lake at dawn surrounded by mountains">
+        <div class="dest-info">
+          <span class="label">Alpine lakes</span>
+          <h3>Still water, sharp air</h3>
+          <p>Glassy lakes ringed by granite peaks, where the only sound is your own coffee brewing.</p>
+        </div>
+      </div>
+      <div class="dest-card reveal reveal-delay-1">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?q=80&w=1400&auto=format&fit=crop" alt="Winding mountain pass road">
+        <div class="dest-info">
+          <span class="label">Mountain passes</span>
+          <h3>Roads that climb into cloud</h3>
+          <p>Switchback after switchback, until the valley disappears beneath you.</p>
+        </div>
+      </div>
+      <div class="dest-card reveal reveal-delay-2">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop" alt="Seaside cliffs and turquoise water">
+        <div class="dest-info">
+          <span class="label">Seaside</span>
+          <h3>Salt air, slow mornings</h3>
+          <p>Park where the cliffs meet the tide and let the horizon set your pace.</p>
+        </div>
+      </div>
+      <div class="dest-card reveal reveal-delay-3">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1400&auto=format&fit=crop" alt="Sunlit forest campsite among tall trees">
+        <div class="dest-info">
+          <span class="label">Forest campsites</span>
+          <h3>Pine, light, and quiet</h3>
+          <p>Fall asleep to wind in the canopy, wake up to sun through the leaves.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. WHAT A TRIP LOOKS LIKE -->
+<section class="pad" style="padding-left:0;padding-right:0;">
+  <div class="wrap" style="margin-bottom:0;">
+    <div class="section-head reveal">
+      <span class="label">03 &mdash; the unfolding day</span>
+      <h2>What a trip<br><em>actually looks like</em></h2>
+      <p>Not an itinerary. A sequence of small, perfect moments.</p>
+    </div>
+  </div>
+  <div class="story-rail">
+    <div class="story-card tall reveal">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=900&auto=format&fit=crop" alt="Morning coffee by the camper van" style="width:380px;">
+      <span class="story-cap">06:42 &mdash; morning coffee</span>
+    </div>
+    <div class="story-card wide reveal reveal-delay-1">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1100&auto=format&fit=crop" alt="Camper van on a winding mountain road">
+      <span class="story-cap">10:15 &mdash; the mountain road</span>
+    </div>
+    <div class="story-card tall reveal reveal-delay-2">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1526721940322-11290cd5be60?q=80&w=900&auto=format&fit=crop" alt="Picnic spread in nature" style="width:380px;">
+      <span class="story-cap">13:00 &mdash; picnic in the open</span>
+    </div>
+    <div class="story-card wide reveal reveal-delay-3">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1532339142463-fd0a8979791a?q=80&w=1100&auto=format&fit=crop" alt="Sunset reflecting on a lake">
+      <span class="story-cap">19:30 &mdash; sunset by the water</span>
+    </div>
+    <div class="story-card tall reveal reveal-delay-4">
+      <img loading="lazy" src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?q=80&w=900&auto=format&fit=crop" alt="Starry night sky over a campsite" style="width:380px;">
+      <span class="story-cap">23:50 &mdash; the stars come out</span>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ROUTES -->
+<section class="pad" id="routes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">04 &mdash; the long way round</span>
+      <h2>Routes you'll<br><em>never forget</em></h2>
+      <p>Four journeys our travelers return to, again and again.</p>
+    </div>
+    <div class="routes-grid">
+
+      <article class="route-card reveal">
+        <div class="route-photo">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=1200&auto=format&fit=crop" alt="Swiss Alps mountain road and lake">
+          <span class="route-stamp">46.5197&deg; N, 7.9962&deg; E</span>
+        </div>
+        <div class="route-body">
+          <span class="label" style="color:var(--clay);">Route 01</span>
+          <h3>Swiss Alps</h3>
+          <div class="route-meta">
+            <div><b>620 km</b><span>Distance</span></div>
+            <div><b>7 days</b><span>Duration</span></div>
+          </div>
+          <p>Glacier-fed lakes, cable-car villages, and roads that fold back on themselves a thousand times. The Alps in their most cinematic form.</p>
+          <span class="route-link">View itinerary &rarr;</span>
+        </div>
+      </article>
+
+      <article class="route-card reveal">
+        <div class="route-photo">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1551524559-8af4e6624178?q=80&w=1200&auto=format&fit=crop" alt="Dolomites jagged peaks at sunset">
+          <span class="route-stamp">46.4102&deg; N, 11.8440&deg; E</span>
+        </div>
+        <div class="route-body">
+          <span class="label" style="color:var(--clay);">Route 02</span>
+          <h3>The Dolomites</h3>
+          <div class="route-meta">
+            <div><b>480 km</b><span>Distance</span></div>
+            <div><b>6 days</b><span>Duration</span></div>
+          </div>
+          <p>Jagged limestone towers that turn rose-gold at dusk. Park beneath them, and you'll understand why photographers never leave.</p>
+          <span class="route-link">View itinerary &rarr;</span>
+        </div>
+      </article>
+
+      <article class="route-card reveal">
+        <div class="route-photo">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop" alt="Cote d'Azur coastline and turquoise sea">
+          <span class="route-stamp">43.7102&deg; N, 7.2620&deg; E</span>
+        </div>
+        <div class="route-body">
+          <span class="label" style="color:var(--clay);">Route 03</span>
+          <h3>C&ocirc;te d'Azur</h3>
+          <div class="route-meta">
+            <div><b>340 km</b><span>Distance</span></div>
+            <div><b>5 days</b><span>Duration</span></div>
+          </div>
+          <p>Cliffside roads above water so blue it looks painted. Mornings for swimming, evenings for watching the light change over the sea.</p>
+          <span class="route-link">View itinerary &rarr;</span>
+        </div>
+      </article>
+
+      <article class="route-card reveal">
+        <div class="route-photo">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop" alt="Bavarian lake surrounded by alpine forest">
+          <span class="route-stamp">47.5576&deg; N, 12.1462&deg; E</span>
+        </div>
+        <div class="route-body">
+          <span class="label" style="color:var(--clay);">Route 04</span>
+          <h3>Bavarian Lakes</h3>
+          <div class="route-meta">
+            <div><b>290 km</b><span>Distance</span></div>
+            <div><b>4 days</b><span>Duration</span></div>
+          </div>
+          <p>Storybook lakes, onion-domed church towers, and forests so green they feel imagined. The gentlest route we offer &mdash; and the most loved.</p>
+          <span class="route-link">View itinerary &rarr;</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. HOME COLLAGE -->
+<section class="pad home-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">05 &mdash; the only constant</span>
+      <h2>Your home is<br><em>always with you</em></h2>
+      <p>Every van is designed like a boutique cabin &mdash; built for comfort at 30 km/h or 3,000 metres.</p>
+    </div>
+    <div class="collage">
+      <div class="c1 reveal"><img loading="lazy" src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=900&auto=format&fit=crop" alt="Cozy camper van bedroom with linen bedding"></div>
+      <div class="c2 reveal reveal-delay-1"><img loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=900&auto=format&fit=crop" alt="Compact kitchen inside a camper van"></div>
+      <div class="c3 reveal reveal-delay-2"><img loading="lazy" src="https://images.unsplash.com/photo-1505843513577-d6c6573c8b07?q=80&w=600&auto=format&fit=crop" alt="Comfortable sitting area inside camper van"></div>
+      <div class="c4 reveal reveal-delay-3"><img loading="lazy" src="https://images.unsplash.com/photo-1499696786059-89f5778c3e76?q=80&w=600&auto=format&fit=crop" alt="Panoramic window view of mountains from inside van"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. ONE WEEK OF FREEDOM -->
+<section class="pad" id="week">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">06 &mdash; a week, mapped</span>
+      <h2>One week<br><em>of freedom</em></h2>
+      <p>A single route, day by day &mdash; so you know exactly what waits beyond the windshield.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-line" id="timelineLine"></div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>01</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=500&auto=format&fit=crop" alt="Camper van setting off at the start of a journey">
+          <div><h3>Start of the route</h3><p>Keys in hand, no fixed plan. The first hour is always the lightest you'll feel all year.</p></div>
+        </div>
+      </div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>02</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?q=80&w=500&auto=format&fit=crop" alt="Mountain road winding through high peaks">
+          <div><h3>Mountain roads</h3><p>Switchbacks, viewpoints, and a sense of scale that no photo quite captures.</p></div>
+        </div>
+      </div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>03</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1499678329028-101435549a4e?q=80&w=500&auto=format&fit=crop" alt="Turquoise alpine lake surrounded by mountains">
+          <div><h3>Lakes</h3><p>You stop for ten minutes. You stay for three hours. Nobody minds.</p></div>
+        </div>
+      </div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>04</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1543783207-ec64e4d05325?q=80&w=500&auto=format&fit=crop" alt="Old European town with cobblestone streets">
+          <div><h3>Ancient towns</h3><p>Cobblestones, espresso, and the kind of streets built before cars existed.</p></div>
+        </div>
+      </div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>05</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1517824806704-9040b037703b?q=80&w=500&auto=format&fit=crop" alt="Camper van camping beside a calm lake">
+          <div><h3>Camping by the water</h3><p>Doors open, feet in the lake, dinner cooked three metres from the shoreline.</p></div>
+        </div>
+      </div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>06</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1473773508845-188df298d2d5?q=80&w=500&auto=format&fit=crop" alt="Sunset over mountain road with golden light">
+          <div><h3>Sunsets and walks</h3><p>The light turns gold around 7. You learn to stop whatever you're doing and watch.</p></div>
+        </div>
+      </div>
+
+      <div class="day-row reveal">
+        <div class="day-num"><span>DAY</span><div class="day-dot"></div><span>07</span></div>
+        <div class="day-card">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1452960962994-acf4fd70b632?q=80&w=500&auto=format&fit=crop" alt="Road leading toward mountains at golden hour, return journey">
+          <div><h3>Return with memories</h3><p>The drive home feels different. You're already planning the next one.</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 7. TRAVEL GALLERY -->
+<section class="pad">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">07 &mdash; proof, not promises</span>
+      <h2>Told by the people<br><em>who went</em></h2>
+      <p>Real trips, real vans, real mornings &mdash; shared by our travelers.</p>
+    </div>
+    <div class="ig-grid">
+      <div class="ig-card reveal">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?q=80&w=600&auto=format&fit=crop" alt="Traveler by campfire at night">
+        <div class="ig-overlay"><div class="name">Elena</div><div class="country">Italy</div><div class="quote">"Ten days, four lakes, zero regrets."</div></div>
+      </div>
+      <div class="ig-card reveal reveal-delay-1">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=600&auto=format&fit=crop" alt="Traveler beside camper van in the mountains">
+        <div class="ig-overlay"><div class="name">Marco</div><div class="country">Switzerland</div><div class="quote">"Every morning, a new front door."</div></div>
+      </div>
+      <div class="ig-card reveal reveal-delay-2">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1516815231560-8f41ec531527?q=80&w=600&auto=format&fit=crop" alt="Family camping trip with dog">
+        <div class="ig-overlay"><div class="name">The Hauer family</div><div class="country">Austria</div><div class="quote">"Our dog has never been happier."</div></div>
+      </div>
+      <div class="ig-card reveal reveal-delay-3">
+        <img loading="lazy" src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=600&auto=format&fit=crop" alt="Traveler watching sunrise over the coast">
+        <div class="ig-overlay"><div class="name">Sofia</div><div class="country">France</div><div class="quote">"I haven't checked my phone in days."</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. BENEFITS -->
+<section class="pad">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">08 &mdash; how it's different</span>
+      <h2>Nothing about this<br><em>feels like renting a car</em></h2>
+    </div>
+    <div class="benefits-grid reveal">
+      <div class="benefit">
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12h18M3 6h18M3 18h18"/><circle cx="17" cy="12" r="1.6" fill="currentColor"/></svg>
+        <h3>Change your route, any time</h3>
+        <p>No fixed schedule. If the next valley looks better, go there instead.</p>
+      </div>
+      <div class="benefit">
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 11l8-8 8 8M6 10v10h12V10"/></svg>
+        <h3>No check-ins, no check-outs</h3>
+        <p>Your home travels with you &mdash; there's no front desk to report to.</p>
+      </div>
+      <div class="benefit">
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+        <h3>Wake up somewhere new, daily</h3>
+        <p>The view outside the window is never the same one twice.</p>
+      </div>
+      <div class="benefit">
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 20c0-4 3-6 7-6s7 2 7 6M12 14a3 3 0 100-6 3 3 0 000 6Z"/></svg>
+        <h3>Travel with family and pets</h3>
+        <p>Built for more than one heartbeat &mdash; kids and dogs included.</p>
+      </div>
+      <div class="benefit">
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V5a3 3 0 016 0v2"/></svg>
+        <h3>Everything you own, close by</h3>
+        <p>No suitcases to repack. Your belongings stay exactly where you left them.</p>
+      </div>
+      <div class="benefit">
+        <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
+        <h3>Help, whenever you need it</h3>
+        <p>A real person, day or night, anywhere on the route.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. AVAILABILITY -->
+<section class="pad avail-section" id="availability">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label">09 &mdash; before the season fills</span>
+      <h2>Last available<br><em>dates this year</em></h2>
+      <p>Our fleet is small on purpose. Summer books out early.</p>
+    </div>
+    <div class="avail-grid">
+      <div class="avail-card reveal">
+        <div class="month">July</div>
+        <div class="avail-bar"><span style="width:14%;"></span></div>
+        <p class="urgent">Only 2 vans left</p>
+      </div>
+      <div class="avail-card reveal reveal-delay-1">
+        <div class="month">August</div>
+        <div class="avail-bar"><span style="width:28%;"></span></div>
+        <p class="urgent">Only 4 vans left</p>
+      </div>
+      <div class="avail-card reveal reveal-delay-2">
+        <div class="month">September</div>
+        <div class="avail-bar"><span style="width:65%;background:#7fae8a;"></span></div>
+        <p>Open &mdash; special low-season rates</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FINAL CTA -->
+<section class="final" id="final">
+  <div class="final-bg" id="finalBg"></div>
+  <div class="final-veil"></div>
+  <div class="final-content">
+    <span class="label reveal" style="color:var(--amber-soft);">Vagabond</span>
+    <h2 class="reveal reveal-delay-1">"The best memories rarely begin<br>with the words 'stay home.'"</h2>
+    <p class="reveal reveal-delay-2">Choose a camper van and go where you've always dreamed of.</p>
+    <a href="#" class="btn reveal reveal-delay-3">
+      Start your trip
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-top">
+    <div class="foot-logo">Vagabond</div>
+    <div class="foot-links">
+      <ul><h4>Routes</h4><li><a href="#routes">Swiss Alps</a></li><li><a href="#routes">Dolomites</a></li><li><a href="#routes">C&ocirc;te d'Azur</a></li></ul>
+      <ul><h4>Company</h4><li><a href="#">About</a></li><li><a href="#">Fleet</a></li><li><a href="#">Support</a></li></ul>
+      <ul><h4>Follow</h4><li><a href="#">Instagram</a></li><li><a href="#">Journal</a></li></ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Vagabond Travel Co.</span>
+    <span>Don't book a room. Book your freedom.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- nav scroll state ----
+  const nav = document.getElementById('nav');
+  function onScroll(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // ---- reveal on scroll (Intersection Observer) ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el=>io.observe(el));
+
+  // timeline line growth
+  const lineEl = document.getElementById('timelineLine');
+  if(lineEl){
+    const lio = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('is-visible'); lio.unobserve(entry.target); }
+      });
+    }, {threshold:0.05});
+    lio.observe(lineEl);
+  }
+
+  // ---- soft parallax on big photos ----
+  const heroBg = document.getElementById('heroBg');
+  const finalBg = document.getElementById('finalBg');
+  const hero = document.getElementById('hero');
+  const final = document.getElementById('final');
+  let ticking = false;
+
+  function parallax(){
+    const vh = window.innerHeight;
+
+    const hRect = hero.getBoundingClientRect();
+    if(hRect.bottom > 0 && hRect.top < vh){
+      const progress = (0 - hRect.top) / vh;
+      heroBg.style.transform = 'scale(1.08) translateY(' + (progress*60) + 'px)';
+    }
+
+    const fRect = final.getBoundingClientRect();
+    if(fRect.bottom > 0 && fRect.top < vh){
+      const progress = (vh - fRect.top) / (vh + fRect.height);
+      finalBg.style.transform = 'scale(1.1) translateY(' + ((progress-0.5)*70) + 'px)';
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){
+      window.requestAnimationFrame(parallax);
+      ticking = true;
+    }
+  }, {passive:true});
+  parallax();
+
+  // respect reduced motion
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    window.removeEventListener('scroll', onScroll);
+  }
+})();
+</script>
+</body>
+</html>

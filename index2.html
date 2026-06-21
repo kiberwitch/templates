@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rent a motorhome and discover Europe on your own terms. Premium RV rentals — Swiss Alps, Dolomites, Norwegian Fjords, Côte d'Azur.">
+<title>Roam — Premium Motorhome Rentals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0A;
+    --grey: #6B6B6B;
+    --light: #E8E4DD;
+    --white: #FFFFFF;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 4rem;
+    mix-blend-mode: normal;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  nav.scrolled .nav-logo { color: var(--black); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  nav.scrolled .nav-links a { color: var(--grey); }
+  .nav-links a:hover { color: var(--black); }
+
+  /* ─── HERO ─── */
+  #hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(0,0,0,0.25) 0%,
+      rgba(0,0,0,0.1) 40%,
+      rgba(0,0,0,0.35) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    color: var(--white);
+    padding: 0 2rem;
+  }
+
+  .hero-content h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 1px 30px rgba(0,0,0,0.25);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.6);
+    padding: 0.9rem 2.4rem;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+
+  .btn-ghost:hover {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+  }
+
+  .btn-dark {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--black);
+    border: 1px solid var(--black);
+    padding: 0.9rem 2.4rem;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .btn-dark:hover {
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint-line {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.4);
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* ─── SHARED ─── */
+  section { position: relative; }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 1rem;
+  }
+
+  /* ─── MANIFESTO ─── */
+  #manifesto {
+    padding: 8rem 0 0;
+  }
+
+  .manifesto-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6rem 2rem;
+  }
+
+  .manifesto-photo {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16/10;
+    object-fit: contain;
+    display: block;
+    background: #f5f5f5;
+  }
+
+  .manifesto-phrase {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 4rem;
+    padding: 0 2rem;
+  }
+
+  .manifesto-divider {
+    width: 1px;
+    height: 80px;
+    background: var(--light);
+    margin: 4rem auto 0;
+  }
+
+  /* ─── ROAD STORIES ─── */
+  #stories {
+    padding: 10rem 0;
+  }
+
+  .stories-header {
+    text-align: center;
+    padding: 0 2rem 6rem;
+  }
+
+  .stories-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .story-block {
+    max-width: 760px;
+    margin: 0 auto 7rem;
+    padding: 0 2rem;
+  }
+
+  .story-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+    display: block;
+    background: #f8f7f5;
+  }
+
+  .story-photo.landscape { aspect-ratio: 16/9; }
+  .story-photo.portrait  { aspect-ratio: 3/4;  }
+
+  .story-note {
+    margin-top: 2rem;
+    padding-left: 0;
+  }
+
+  .story-place {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 0.75rem;
+  }
+
+  .story-text {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: #2a2a2a;
+    font-style: italic;
+    max-width: 540px;
+  }
+
+  /* ─── ONE HOME / VIEWS ─── */
+  #views {
+    padding: 8rem 0;
+    background: #fafaf9;
+  }
+
+  .views-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .views-left {
+    padding: 4rem;
+  }
+
+  .views-van {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+    display: block;
+    background: #f0efed;
+  }
+
+  .views-right {
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .views-header {
+    margin-bottom: 3rem;
+  }
+
+  .views-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .views-header p {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--grey);
+    max-width: 380px;
+  }
+
+  .views-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+  }
+
+  .view-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  .view-slide.active { opacity: 1; }
+
+  .view-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #f0efed;
+  }
+
+  .view-label {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    background: rgba(255,255,255,0.85);
+    padding: 0.4rem 0.8rem;
+  }
+
+  .views-dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .views-dot {
+    width: 20px;
+    height: 1px;
+    background: var(--light);
+    cursor: pointer;
+    transition: background 0.3s, width 0.3s;
+    border: none;
+  }
+
+  .views-dot.active {
+    background: var(--black);
+    width: 40px;
+  }
+
+  /* ─── GALLERY ─── */
+  #gallery {
+    padding: 10rem 2rem;
+  }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .gallery-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .masonry-grid {
+    columns: 3;
+    column-gap: 1.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .masonry-item img {
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    background: #f5f4f2;
+    transition: opacity 0.4s;
+  }
+
+  .masonry-caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    background: rgba(10,10,10,0);
+    opacity: 0;
+    transition: opacity 0.4s, background 0.4s;
+  }
+
+  .masonry-item:hover .masonry-caption {
+    opacity: 1;
+    background: rgba(10,10,10,0.35);
+  }
+
+  .masonry-place {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  /* ─── NUMBERS ─── */
+  #numbers {
+    padding: 8rem 2rem;
+    border-top: 1px solid var(--light);
+    border-bottom: 1px solid var(--light);
+  }
+
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .number-item {}
+
+  .number-value {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .number-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  /* ─── ROUTES ─── */
+  #routes {
+    padding: 8rem 0;
+  }
+
+  .routes-header {
+    text-align: center;
+    padding: 0 2rem 6rem;
+  }
+
+  .routes-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .route-block {
+    position: relative;
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .route-block img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.8);
+  }
+
+  .route-info {
+    position: absolute;
+    bottom: 4rem;
+    left: 5rem;
+    color: var(--white);
+  }
+
+  .route-number {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1rem;
+  }
+
+  .route-name {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .route-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    max-width: 360px;
+    font-weight: 300;
+  }
+
+  /* ─── FINAL ─── */
+  #final {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .final-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65);
+  }
+
+  .final-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.45));
+  }
+
+  .final-content {
+    position: relative;
+    text-align: center;
+    color: var(--white);
+    padding: 0 2rem;
+  }
+
+  .final-content blockquote {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    text-shadow: 0 1px 30px rgba(0,0,0,0.3);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--light);
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--black); }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: #bbb;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+
+    .views-grid { grid-template-columns: 1fr; }
+    .views-left, .views-right { padding: 2rem; }
+
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem 1rem; }
+
+    .route-info { left: 2rem; bottom: 2.5rem; }
+    .route-block img { height: 70vh; }
+
+    .masonry-grid { columns: 2; }
+
+    footer { flex-direction: column; gap: 2rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+  }
+
+  @media (max-width: 560px) {
+    .masonry-grid { columns: 1; }
+    .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+    .manifesto-photo { aspect-ratio: 4/3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { transition: none; }
+    .scroll-hint-line { animation: none; }
+    .view-slide { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Roam</a>
+  <ul class="nav-links">
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#routes">Routes</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#final">Rent</a></li>
+  </ul>
+</nav>
+
+<!-- 1. HERO -->
+<section id="hero">
+  <img
+    class="hero-img"
+    src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=2000&auto=format&fit=crop&q=80"
+    alt="Camper van on an open mountain road at golden hour"
+    fetchpriority="high"
+  >
+  <div class="hero-overlay"></div>
+  <div class="hero-content fade-in visible">
+    <h1>The world is more<br>than just one address.</h1>
+    <a href="#manifesto" class="btn-ghost">Start your trip</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-hint-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- 2. PHOTOGRAPHIC MANIFESTO -->
+<section id="manifesto">
+
+  <div class="manifesto-item fade-in">
+    <img
+      class="manifesto-photo"
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&auto=format&fit=crop&q=80"
+      alt="Lake at dawn with mountains reflected in still water"
+      loading="lazy"
+    >
+    <p class="manifesto-phrase">Wake up by a lake.</p>
+    <div class="manifesto-divider"></div>
+  </div>
+
+  <div class="manifesto-item fade-in">
+    <img
+      class="manifesto-photo"
+      src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&auto=format&fit=crop&q=80"
+      alt="Laptop open with panoramic Alpine view through a camper window"
+      loading="lazy"
+    >
+    <p class="manifesto-phrase">Work with a view of the Alps.</p>
+    <div class="manifesto-divider"></div>
+  </div>
+
+  <div class="manifesto-item fade-in">
+    <img
+      class="manifesto-photo"
+      src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600&auto=format&fit=crop&q=80"
+      alt="Table set for dinner in a forest clearing at dusk"
+      loading="lazy"
+    >
+    <p class="manifesto-phrase">Dinner under the stars.</p>
+    <div class="manifesto-divider"></div>
+  </div>
+
+  <div class="manifesto-item fade-in">
+    <img
+      class="manifesto-photo"
+      src="https://images.unsplash.com/photo-1519575706483-221027bfbb31?w=1600&auto=format&fit=crop&q=80"
+      alt="Camper van parked at a cliff edge overlooking the sea"
+      loading="lazy"
+    >
+    <p class="manifesto-phrase">Sleep where you like.</p>
+  </div>
+
+</section>
+
+<!-- 3. ROAD STORIES -->
+<section id="stories">
+  <div class="stories-header fade-in">
+    <p class="section-label">Road Stories</p>
+    <h2>Miles worth remembering.</h2>
+  </div>
+
+  <div class="story-block fade-in">
+    <img
+      class="story-photo landscape"
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&auto=format&fit=crop&q=80"
+      alt="Mountain road winding through a valley"
+      loading="lazy"
+    >
+    <div class="story-note">
+      <p class="story-place">Switzerland — Gotthard Pass</p>
+      <p class="story-text">We left Geneva before the city woke up. By noon, the road had climbed so high that clouds moved below us, not above.</p>
+    </div>
+  </div>
+
+  <div class="story-block fade-in">
+    <img
+      class="story-photo"
+      src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&auto=format&fit=crop&q=80"
+      alt="Coastline with turquoise water and cliffs"
+      loading="lazy"
+    >
+    <div class="story-note">
+      <p class="story-place">Croatia — Dalmatian Coast</p>
+      <p class="story-text">The Adriatic appeared suddenly, between two stone walls, and we stopped the engine just to listen.</p>
+    </div>
+  </div>
+
+  <div class="story-block fade-in">
+    <img
+      class="story-photo landscape"
+      src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1400&auto=format&fit=crop&q=80"
+      alt="Forest road in autumn light"
+      loading="lazy"
+    >
+    <div class="story-note">
+      <p class="story-place">Black Forest — Germany</p>
+      <p class="story-text">No map needed. We followed the smell of pine until the road ended at a clearing too perfect to leave.</p>
+    </div>
+  </div>
+
+  <div class="story-block fade-in">
+    <img
+      class="story-photo"
+      src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1400&auto=format&fit=crop&q=80"
+      alt="Mountain lake surrounded by peaks"
+      loading="lazy"
+    >
+    <div class="story-note">
+      <p class="story-place">Dolomites — Italy</p>
+      <p class="story-text">The lake was so still it looked painted. We sat with coffee and forgot completely that Monday existed.</p>
+    </div>
+  </div>
+
+  <div class="story-block fade-in">
+    <img
+      class="story-photo landscape"
+      src="https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=1400&auto=format&fit=crop&q=80"
+      alt="Dramatic sunset over open plains"
+      loading="lazy"
+    >
+    <div class="story-note">
+      <p class="story-place">Provence — France</p>
+      <p class="story-text">Sunsets here are slow and deliberate, like the region itself. The light stays longer than anywhere we've been.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ONE HOME, THOUSAND VIEWS -->
+<section id="views">
+  <div class="views-grid">
+    <div class="views-left fade-in">
+      <img
+        class="views-van"
+        src="https://images.unsplash.com/photo-1533591380348-14193f1de18f?w=1200&auto=format&fit=crop&q=80"
+        alt="Modern camper van interior with panoramic windows"
+        loading="lazy"
+      >
+    </div>
+    <div class="views-right fade-in">
+      <div class="views-header">
+        <p class="section-label">One Home</p>
+        <h2>A thousand views.</h2>
+        <p>The van never changes. The world outside the window changes every morning. That is the point.</p>
+      </div>
+
+      <div class="views-slider" id="viewsSlider">
+        <div class="view-slide active">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&auto=format&fit=crop&q=80" alt="Alpine mountain view" loading="lazy">
+          <span class="view-label">Swiss Alps</span>
+        </div>
+        <div class="view-slide">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&auto=format&fit=crop&q=80" alt="Mediterranean sea view" loading="lazy">
+          <span class="view-label">Côte d'Azur</span>
+        </div>
+        <div class="view-slide">
+          <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1200&auto=format&fit=crop&q=80" alt="Forest view" loading="lazy">
+          <span class="view-label">Black Forest</span>
+        </div>
+        <div class="view-slide">
+          <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&auto=format&fit=crop&q=80" alt="Mountain lake" loading="lazy">
+          <span class="view-label">Dolomites</span>
+        </div>
+        <div class="view-slide">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&auto=format&fit=crop&q=80" alt="Norwegian fjord" loading="lazy">
+          <span class="view-label">Norwegian Fjords</span>
+        </div>
+      </div>
+
+      <div class="views-dots" id="viewsDots">
+        <button class="views-dot active" data-index="0" aria-label="Alpine view"></button>
+        <button class="views-dot" data-index="1" aria-label="Sea view"></button>
+        <button class="views-dot" data-index="2" aria-label="Forest view"></button>
+        <button class="views-dot" data-index="3" aria-label="Lake view"></button>
+        <button class="views-dot" data-index="4" aria-label="Fjord view"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. GALLERY -->
+<section id="gallery">
+  <div class="gallery-header fade-in">
+    <p class="section-label">Memories</p>
+    <h2>Every road has a story.</h2>
+  </div>
+
+  <div class="masonry-grid" id="masonryGrid">
+    <!-- JS-generated for efficiency; defined below in script -->
+  </div>
+</section>
+
+<!-- 6. NUMBERS -->
+<section id="numbers">
+  <div class="numbers-grid">
+    <div class="number-item fade-in">
+      <span class="number-value">1,500+</span>
+      <span class="number-label">Trips</span>
+    </div>
+    <div class="number-item fade-in">
+      <span class="number-value">4.9</span>
+      <span class="number-label">Average rating</span>
+    </div>
+    <div class="number-item fade-in">
+      <span class="number-value">12</span>
+      <span class="number-label">Countries</span>
+    </div>
+    <div class="number-item fade-in">
+      <span class="number-value">24/7</span>
+      <span class="number-label">Support</span>
+    </div>
+  </div>
+</section>
+
+<!-- 7. DREAM ROUTES -->
+<section id="routes">
+  <div class="routes-header fade-in">
+    <p class="section-label">Dream Routes</p>
+    <h2>Choose your horizon.</h2>
+  </div>
+
+  <div class="route-block fade-in">
+    <img
+      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000&auto=format&fit=crop&q=80"
+      alt="Swiss Alps mountain road"
+      loading="lazy"
+    >
+    <div class="route-info">
+      <p class="route-number">Route 01</p>
+      <h3 class="route-name">Swiss Alps</h3>
+      <p class="route-desc">Bernina Pass, Furka, Susten. Three legendary roads. One week. Altitude that rearranges your sense of scale.</p>
+    </div>
+  </div>
+
+  <div class="route-block fade-in">
+    <img
+      src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=2000&auto=format&fit=crop&q=80"
+      alt="Dolomites landscape"
+      loading="lazy"
+    >
+    <div class="route-info">
+      <p class="route-number">Route 02</p>
+      <h3 class="route-name">Dolomites</h3>
+      <p class="route-desc">Pale limestone towers rise from green meadows. The light here changes every hour. Arrive once; return forever.</p>
+    </div>
+  </div>
+
+  <div class="route-block fade-in">
+    <img
+      src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&auto=format&fit=crop&q=80"
+      alt="Côte d'Azur coastline"
+      loading="lazy"
+    >
+    <div class="route-info">
+      <p class="route-number">Route 03</p>
+      <h3 class="route-name">Côte d'Azur</h3>
+      <p class="route-desc">Nice to Monaco. The Corniche roads above turquoise water. Park at the edge of the world every evening.</p>
+    </div>
+  </div>
+
+  <div class="route-block fade-in">
+    <img
+      src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=2000&auto=format&fit=crop&q=80"
+      alt="Norwegian fjords"
+      loading="lazy"
+    >
+    <div class="route-info">
+      <p class="route-number">Route 04</p>
+      <h3 class="route-name">Norwegian Fjords</h3>
+      <p class="route-desc">Midnight sun. Waterfalls into black water. Roads that feel borrowed from another planet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. FINAL -->
+<section id="final">
+  <img
+    class="final-img"
+    src="https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=2400&auto=format&fit=crop&q=80"
+    alt="Empty road stretching to the horizon at golden hour"
+    loading="lazy"
+  >
+  <div class="final-overlay"></div>
+  <div class="final-content fade-in">
+    <blockquote>"Someday" becomes today<br>with one decision.</blockquote>
+    <a href="#" class="btn-dark">Rent a Motorhome</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Roam</span>
+  <ul class="footer-links">
+    <li><a href="#">Fleet</a></li>
+    <li><a href="#">Routes</a></li>
+    <li><a href="#">FAQ</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Roam</span>
+</footer>
+
+<script>
+  // ── Gallery data ──
+  const photos = [
+    { src:'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&auto=format&fit=crop&q=75', place:'Norwegian Fjords', h:320 },
+    { src:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&auto=format&fit=crop&q=75', place:'Swiss Alps',         h:440 },
+    { src:'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=800&auto=format&fit=crop&q=75', place:'Tuscany, Italy',      h:360 },
+    { src:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&auto=format&fit=crop&q=75', place:'Côte d\'Azur',       h:280 },
+    { src:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&auto=format&fit=crop&q=75', place:'Dolomites',           h:420 },
+    { src:'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop&q=75', place:'Black Forest',        h:370 },
+    { src:'https://images.unsplash.com/photo-1519575706483-221027bfbb31?w=800&auto=format&fit=crop&q=75', place:'Amalfi Coast',        h:300 },
+    { src:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=75', place:'Lofoten Islands',     h:400 },
+    { src:'https://images.unsplash.com/photo-1533591380348-14193f1de18f?w=800&auto=format&fit=crop&q=75', place:'Lake Geneva',         h:260 },
+    { src:'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=800&auto=format&fit=crop&q=75', place:'Pyrenees, Spain',     h:380 },
+    { src:'https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=800&auto=format&fit=crop&q=75', place:'Iceland Ring Road',   h:320 },
+    { src:'https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=800&auto=format&fit=crop&q=75', place:'Scottish Highlands',  h:460 },
+    { src:'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&auto=format&fit=crop&q=75', place:'Provence, France',    h:290 },
+    { src:'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&auto=format&fit=crop&q=75', place:'Canadian Rockies',    h:410 },
+    { src:'https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=800&auto=format&fit=crop&q=75', place:'Cinque Terre',        h:340 },
+    { src:'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=800&auto=format&fit=crop&q=75', place:'Austrian Tyrol',      h:380 },
+    { src:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&auto=format&fit=crop&q=75', place:'Portuguese Coast',    h:300 },
+    { src:'https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=800&auto=format&fit=crop&q=75', place:'Bavaria, Germany',    h:430 },
+    { src:'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&auto=format&fit=crop&q=75', place:'Lake Bled, Slovenia', h:350 },
+    { src:'https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=800&auto=format&fit=crop&q=75', place:'Rhine Valley',        h:280 },
+    { src:'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&auto=format&fit=crop&q=75', place:'Santorini, Greece',   h:320 },
+  ];
+
+  const grid = document.getElementById('masonryGrid');
+  photos.forEach(p => {
+    const item = document.createElement('div');
+    item.className = 'masonry-item fade-in';
+    item.innerHTML = `
+      <img src="${p.src}" alt="${p.place}" loading="lazy" style="min-height:${p.h}px">
+      <div class="masonry-caption"><span class="masonry-place">${p.place}</span></div>
+    `;
+    grid.appendChild(item);
+  });
+
+  // ── IntersectionObserver fade-ins ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── Nav scroll state ──
+  const nav = document.getElementById('main-nav');
+  const handleScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > window.innerHeight * 0.7);
+  };
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // ── Views slider ──
+  const slides = document.querySelectorAll('.view-slide');
+  const dots   = document.querySelectorAll('.views-dot');
+  let current  = 0;
+  let timer;
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function advance() { goTo((current + 1) % slides.length); }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(advance, 3500);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goTo(parseInt(dot.dataset.index));
+      startTimer();
+    });
+  });
+
+  startTimer();
+
+  // ── Lazy-load images already in DOM via native loading="lazy" ──
+  // No additional JS needed — browsers handle it natively.
+</script>
+</body>
+</html>

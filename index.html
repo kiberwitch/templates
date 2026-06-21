@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WildRoam — Аренда Домов на Колёсах</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════ HEADER ═══════════════════════════════════ -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">W</span>
+        <span class="logo-text">WildRoam</span>
+      </a>
+      <nav class="main-nav" id="main-nav">
+        <a href="#fleet">Автопарк</a>
+        <a href="#how">Как это работает</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#booking" class="btn btn-header">Забронировать</a>
+      <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════ HERO ════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1920&q=85&auto=format&fit=crop"
+        alt="Кемпер в горах"
+        class="hero-img"
+      />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Дома на колёсах · С 2018 года</p>
+      <h1 class="hero-title">
+        Свобода&nbsp;путешествовать<br />
+        <em>без&nbsp;границ</em>
+      </h1>
+      <p class="hero-sub">
+        Арендуйте кемпер и отправляйтесь туда, куда зовёт дорога.<br class="br-desktop" />
+        Горы, побережье, леса — всё это ждёт вас.
+      </p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-primary">Забронировать</a>
+        <a href="#fleet" class="btn btn-ghost">Наш автопарк</a>
+      </div>
+    </div>
+
+    <!-- Film-strip ticker — signature element -->
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span>Алтай</span><span>·</span>
+        <span>Байкал</span><span>·</span>
+        <span>Карелия</span><span>·</span>
+        <span>Кавказ</span><span>·</span>
+        <span>Крым</span><span>·</span>
+        <span>Алтай</span><span>·</span>
+        <span>Байкал</span><span>·</span>
+        <span>Карелия</span><span>·</span>
+        <span>Кавказ</span><span>·</span>
+        <span>Крым</span><span>·</span>
+        <span>Алтай</span><span>·</span>
+        <span>Байкал</span><span>·</span>
+        <span>Карелия</span><span>·</span>
+        <span>Кавказ</span><span>·</span>
+        <span>Крым</span><span>·</span>
+      </div>
+    </div>
+
+    <a href="#advantages" class="hero-scroll" aria-label="Вниз">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════ ADVANTAGES ══════════════════════════════ -->
+  <section class="advantages section-reveal" id="advantages">
+    <div class="container">
+      <div class="section-label">Почему WildRoam</div>
+      <h2 class="section-title">Путешествуй иначе</h2>
+      <div class="adv-grid">
+
+        <div class="adv-card">
+          <div class="adv-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M24 14v10l6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Гибкое бронирование</h3>
+          <p>Меняйте даты без штрафов за 48 часов до начала аренды. Ваши планы — ваши правила.</p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M24 6l4 12h12l-10 7 4 12-10-7-10 7 4-12L8 18h12z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Премиум-комфорт</h3>
+          <p>Каждый кемпер оснащён всем необходимым: кухня, душ, климат-контроль, Wi-Fi.</p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M24 4C13 4 4 13 4 24s9 20 20 20 20-9 20-20S35 4 24 4z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 20s2 4 8 4 8-4 8-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="18" cy="16" r="2" fill="currentColor"/>
+              <circle cx="30" cy="16" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Поддержка 24/7</h3>
+          <p>Наша команда всегда на связи. Любой вопрос решим в течение 15 минут.</p>
+        </div>
+
+        <div class="adv-card">
+          <div class="adv-icon">
+            <svg viewBox="0 0 48 48" fill="none">
+              <path d="M8 38V20L24 8l16 12v18H30V28h-12v10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Страховка включена</h3>
+          <p>Полная страховка каско и ОСАГО входит в стоимость. Путешествуйте с уверенностью.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ FLEET ═══════════════════════════════════ -->
+  <section class="fleet section-reveal" id="fleet">
+    <div class="container">
+      <div class="section-label">Наш автопарк</div>
+      <h2 class="section-title">Выберите свой кемпер</h2>
+      <p class="section-sub">От компактных ванлайф-фургонов до просторных домов на колёсах — у нас есть всё для вашего путешествия.</p>
+
+      <div class="fleet-grid">
+
+        <article class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?w=800&q=80&auto=format&fit=crop" alt="VW California Ocean" loading="lazy" />
+            <span class="fleet-badge">Хит</span>
+          </div>
+          <div class="fleet-info">
+            <div class="fleet-meta">
+              <span class="fleet-type">Фургон</span>
+              <span class="fleet-seats">2 места</span>
+            </div>
+            <h3>VW California Ocean</h3>
+            <p>Легендарный ванлайф-фургон с раздвижной крышей и встроенной кухней. Идеален для пары.</p>
+            <div class="fleet-footer">
+              <div class="fleet-price"><strong>от 8 900 ₽</strong> / сутки</div>
+              <a href="#booking" class="btn btn-sm">Забронировать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&q=80&auto=format&fit=crop" alt="Mercedes Sprinter Lux" loading="lazy" />
+          </div>
+          <div class="fleet-info">
+            <div class="fleet-meta">
+              <span class="fleet-type">Кемпер</span>
+              <span class="fleet-seats">4 места</span>
+            </div>
+            <h3>Mercedes Sprinter Lux</h3>
+            <p>Просторный кастомный кемпер с отдельной спальней, душем и всей бытовой техникой.</p>
+            <div class="fleet-footer">
+              <div class="fleet-price"><strong>от 14 500 ₽</strong> / сутки</div>
+              <a href="#booking" class="btn btn-sm">Забронировать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=800&q=80&auto=format&fit=crop" alt="Airstream Classic" loading="lazy" />
+            <span class="fleet-badge fleet-badge--new">Новинка</span>
+          </div>
+          <div class="fleet-info">
+            <div class="fleet-meta">
+              <span class="fleet-type">Прицеп</span>
+              <span class="fleet-seats">6 мест</span>
+            </div>
+            <h3>Airstream Classic 33</h3>
+            <p>Легендарный алюминиевый прицеп с дизайном эпохи. Роскошный интерьер, огромная кухня и панорамные окна.</p>
+            <div class="fleet-footer">
+              <div class="fleet-price"><strong>от 18 000 ₽</strong> / сутки</div>
+              <a href="#booking" class="btn btn-sm">Забронировать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?w=800&q=80&auto=format&fit=crop" alt="Ford Transit Adventure" loading="lazy" />
+          </div>
+          <div class="fleet-info">
+            <div class="fleet-meta">
+              <span class="fleet-type">Фургон</span>
+              <span class="fleet-seats">3 места</span>
+            </div>
+            <h3>Ford Transit Adventure</h3>
+            <p>Компактный, манёвренный и хорошо оснащённый. Отличный выбор для соло-путешественников и пар.</p>
+            <div class="fleet-footer">
+              <div class="fleet-price"><strong>от 7 200 ₽</strong> / сутки</div>
+              <a href="#booking" class="btn btn-sm">Забронировать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1533632359083-0185df1be85d?w=800&q=80&auto=format&fit=crop" alt="Hymer Classe B" loading="lazy" />
+          </div>
+          <div class="fleet-info">
+            <div class="fleet-meta">
+              <span class="fleet-type">Моторхоум</span>
+              <span class="fleet-seats">5 мест</span>
+            </div>
+            <h3>Hymer Classe B 670</h3>
+            <p>Полноценный моторхоум европейского класса. Кожаный салон, солнечные панели и бортовой компьютер.</p>
+            <div class="fleet-footer">
+              <div class="fleet-price"><strong>от 21 000 ₽</strong> / сутки</div>
+              <a href="#booking" class="btn btn-sm">Забронировать</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1476158085676-e67f57ed9ed7?w=800&q=80&auto=format&fit=crop" alt="Toyota HiAce Camper" loading="lazy" />
+          </div>
+          <div class="fleet-info">
+            <div class="fleet-meta">
+              <span class="fleet-type">Минивэн</span>
+              <span class="fleet-seats">2 места</span>
+            </div>
+            <h3>Toyota HiAce Camper</h3>
+            <p>Японская надёжность + минималистичная конверсия. Проходимый, экономичный, харизматичный.</p>
+            <div class="fleet-footer">
+              <div class="fleet-price"><strong>от 6 500 ₽</strong> / сутки</div>
+              <a href="#booking" class="btn btn-sm">Забронировать</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ HOW IT WORKS ════════════════════════════ -->
+  <section class="how section-reveal" id="how">
+    <div class="container">
+      <div class="section-label">Процесс</div>
+      <h2 class="section-title">Три шага до приключения</h2>
+
+      <div class="how-steps">
+
+        <div class="how-step">
+          <div class="how-visual">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="56" stroke="var(--taupe)" stroke-width="1"/>
+              <rect x="28" y="36" width="64" height="48" rx="4" stroke="var(--green)" stroke-width="2"/>
+              <path d="M28 48h64" stroke="var(--green)" stroke-width="2"/>
+              <circle cx="38" cy="42" r="3" fill="var(--green)"/>
+              <circle cx="50" cy="42" r="3" fill="var(--taupe)"/>
+              <rect x="38" y="58" width="18" height="3" rx="1.5" fill="var(--taupe)"/>
+              <rect x="38" y="66" width="44" height="3" rx="1.5" fill="var(--sand)"/>
+              <rect x="38" y="74" width="30" height="3" rx="1.5" fill="var(--sand)"/>
+            </svg>
+          </div>
+          <div class="how-num">01</div>
+          <h3>Выберите кемпер</h3>
+          <p>Просмотрите автопарк, выберите подходящий вариант и проверьте доступность на нужные даты.</p>
+        </div>
+
+        <div class="how-connector"></div>
+
+        <div class="how-step">
+          <div class="how-visual">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="56" stroke="var(--taupe)" stroke-width="1"/>
+              <rect x="30" y="30" width="60" height="60" rx="8" stroke="var(--green)" stroke-width="2"/>
+              <path d="M42 60l12 12 24-24" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="how-num">02</div>
+          <h3>Оформите бронь</h3>
+          <p>Заполните форму, внесите предоплату 30% и получите подтверждение на email за 10 минут.</p>
+        </div>
+
+        <div class="how-connector"></div>
+
+        <div class="how-step">
+          <div class="how-visual">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="56" stroke="var(--taupe)" stroke-width="1"/>
+              <path d="M20 80 Q40 50 60 60 Q80 70 100 40" stroke="var(--green)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="60" cy="60" r="5" fill="var(--green)"/>
+              <circle cx="100" cy="40" r="5" fill="var(--green)"/>
+              <path d="M54 30l6-10 6 10" stroke="var(--taupe)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="how-num">03</div>
+          <h3>Отправляйтесь в путь</h3>
+          <p>Получите ключи, пройдите инструктаж и езжайте куда душа пожелает. Мы всегда на связи.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ GALLERY ══════════════════════════════════ -->
+  <section class="gallery section-reveal" id="gallery">
+    <div class="container">
+      <div class="section-label">Галерея путешествий</div>
+      <h2 class="section-title">Куда приведёт дорога</h2>
+    </div>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-item gallery-item--tall" data-src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1200&q=90&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&q=80&auto=format&fit=crop" alt="Кемпер у горы" loading="lazy" />
+        <div class="gallery-caption">Алтай, осень 2024</div>
+      </div>
+
+      <div class="gallery-item" data-src="https://images.unsplash.com/photo-1533632359083-0185df1be85d?w=1200&q=90&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1533632359083-0185df1be85d?w=600&q=80&auto=format&fit=crop" alt="Фургон на закате" loading="lazy" />
+        <div class="gallery-caption">Байкал, август</div>
+      </div>
+
+      <div class="gallery-item" data-src="https://images.unsplash.com/photo-1476158085676-e67f57ed9ed7?w=1200&q=90&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1476158085676-e67f57ed9ed7?w=600&q=80&auto=format&fit=crop" alt="Вечер у кемпера" loading="lazy" />
+        <div class="gallery-caption">Карелия, июнь</div>
+      </div>
+
+      <div class="gallery-item gallery-item--wide" data-src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=1200&q=90&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&q=80&auto=format&fit=crop" alt="Кемпер у воды" loading="lazy" />
+        <div class="gallery-caption">Байкал, рассвет</div>
+      </div>
+
+      <div class="gallery-item" data-src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?w=1200&q=90&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1502784444187-359ac186c5bb?w=600&q=80&auto=format&fit=crop" alt="Горный перевал" loading="lazy" />
+        <div class="gallery-caption">Кавказ, сентябрь</div>
+      </div>
+
+      <div class="gallery-item" data-src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=1200&q=90&auto=format&fit=crop">
+        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=600&q=80&auto=format&fit=crop" alt="Кемпер в лесу" loading="lazy" />
+        <div class="gallery-caption">Карелия, утро</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════ LIGHTBOX ════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Закрыть">&times;</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Предыдущее">&#8592;</button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Следующее">&#8594;</button>
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightbox-img" />
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════ REVIEWS ═══════════════════════════════════ -->
+  <section class="reviews section-reveal" id="reviews">
+    <div class="container">
+      <div class="section-label">Отзывы</div>
+      <h2 class="section-title">Что говорят наши путешественники</h2>
+
+      <div class="slider-wrap">
+        <div class="slider" id="reviews-slider">
+
+          <div class="review-slide">
+            <blockquote>
+              <p>«Невероятный опыт! VW California полностью изменил моё представление об отдыхе. Три недели по Алтаю — это было лучшее, что происходило в моей жизни.»</p>
+            </blockquote>
+            <div class="review-author">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&q=80&auto=format&fit=crop" alt="Мария К." />
+              <div>
+                <strong>Мария К.</strong>
+                <span>Москва · 3 поездки</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+
+          <div class="review-slide">
+            <blockquote>
+              <p>«Брали Airstream на 10 дней семьёй из пяти человек. Всего хватило с головой: места, комфорта и впечатлений. Сервис WildRoam на высоте — ни одного вопроса без ответа.»</p>
+            </blockquote>
+            <div class="review-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&q=80&auto=format&fit=crop" alt="Дмитрий В." />
+              <div>
+                <strong>Дмитрий В.</strong>
+                <span>Санкт-Петербург · 5 поездок</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+
+          <div class="review-slide">
+            <blockquote>
+              <p>«Впервые попробовала ванлайф-формат — и теперь не представляю отпуск иначе. Ford Transit был укомплектован до мелочей, а команда помогла спланировать маршрут по Карелии.»</p>
+            </blockquote>
+            <div class="review-author">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&q=80&auto=format&fit=crop" alt="Анна С." />
+              <div>
+                <strong>Анна С.</strong>
+                <span>Казань · 2 поездки</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+
+          <div class="review-slide">
+            <blockquote>
+              <p>«Hymer Classe B — это настоящий дом на колёсах. Кожаный салон, панорамный люк, солнечные панели. Путешествовали по Кавказу две недели, ни разу не подключались к электросети.»</p>
+            </blockquote>
+            <div class="review-author">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&q=80&auto=format&fit=crop" alt="Алексей Н." />
+              <div>
+                <strong>Алексей Н.</strong>
+                <span>Екатеринбург · 7 поездок</span>
+              </div>
+              <div class="review-stars">★★★★★</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="slider-controls">
+          <button class="slider-btn" id="slider-prev" aria-label="Предыдущий отзыв">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="slider-dots" id="slider-dots"></div>
+          <button class="slider-btn" id="slider-next" aria-label="Следующий отзыв">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ FAQ ══════════════════════════════════════ -->
+  <section class="faq section-reveal" id="faq">
+    <div class="container faq-container">
+      <div class="faq-header">
+        <div class="section-label">Вопросы</div>
+        <h2 class="section-title">Часто спрашивают</h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Нужны ли специальные права для управления кемпером?
+            <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p>Для фургонов и большинства кемперов достаточно обычных прав категории B. Для моторхоумов массой свыше 3,5 т потребуется категория C. Подробности — в описании конкретного автомобиля.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Что включено в стоимость аренды?
+            <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p>В стоимость входят: полная страховка КАСКО и ОСАГО, постельное бельё и полотенца, базовый кухонный набор (посуда, приборы), техническая поддержка 24/7 и первый бак топлива.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Каков минимальный срок аренды?
+            <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p>Минимальный срок аренды — 3 дня. В высокий сезон (июль–август) — 5 дней. Для длительной аренды от 30 дней действуют специальные тарифы со скидкой до 30%.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Можно ли выехать за границу?
+            <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p>Да, большинство наших кемперов разрешены для выезда в страны СНГ. Выезд в Европу доступен по отдельному соглашению. За 72 часа до поездки уведомьте нас о маршруте — мы оформим все необходимые документы.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Какой депозит нужно внести?
+            <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p>Возвращаемый залог составляет 30 000–50 000 ₽ в зависимости от класса автомобиля. Он блокируется на карте при получении кемпера и полностью возвращается в течение 3 дней после сдачи при отсутствии ущерба.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Есть ли ограничение по пробегу?
+            <span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+          </button>
+          <div class="faq-answer">
+            <p>В тарифы включено 300 км в сутки. Каждый дополнительный километр стоит 8 ₽. Для маршрутов свыше 500 км/сутки есть тариф «Безлимит» с фиксированной доплатой 1 500 ₽/день.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ BOOKING CTA ══════════════════════════════ -->
+  <section class="booking section-reveal" id="booking">
+    <div class="booking-bg">
+      <img src="https://images.unsplash.com/photo-1476158085676-e67f57ed9ed7?w=1920&q=80&auto=format&fit=crop" alt="" aria-hidden="true" />
+      <div class="booking-overlay"></div>
+    </div>
+    <div class="container booking-inner">
+      <div class="booking-text">
+        <div class="section-label section-label--light">Начни сейчас</div>
+        <h2 class="booking-title">Твоё следующее<br /><em>приключение ждёт</em></h2>
+        <p>Заполни форму — мы свяжемся в течение 15 минут и поможем подобрать идеальный кемпер для твоего маршрута.</p>
+      </div>
+      <div class="booking-form-wrap glass">
+        <form class="booking-form" id="booking-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Имя</label>
+              <input type="text" id="name" name="name" placeholder="Александр" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date-from">Дата начала</label>
+              <input type="date" id="date-from" name="date-from" required />
+            </div>
+            <div class="form-group">
+              <label for="date-to">Дата окончания</label>
+              <input type="date" id="date-to" name="date-to" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="camper-type">Тип кемпера</label>
+            <select id="camper-type" name="camper-type">
+              <option value="">Выберите вариант…</option>
+              <option>VW California Ocean — от 8 900 ₽/сутки</option>
+              <option>Mercedes Sprinter Lux — от 14 500 ₽/сутки</option>
+              <option>Airstream Classic 33 — от 18 000 ₽/сутки</option>
+              <option>Ford Transit Adventure — от 7 200 ₽/сутки</option>
+              <option>Hymer Classe B 670 — от 21 000 ₽/сутки</option>
+              <option>Toyota HiAce Camper — от 6 500 ₽/сутки</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="comment">Пожелания к маршруту</label>
+            <textarea id="comment" name="comment" rows="3" placeholder="Расскажите, куда планируете ехать…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Отправить заявку</button>
+          <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a>.</p>
+        </form>
+        <!-- <div class="form-success" id="form-success" hidden>
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="var(--green)" stroke-width="2"/><path d="M22 40l12 12 24-24" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Заявка отправлена!</h3>
+          <p>Мы перезвоним вам в течение 15 минут.</p>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark">W</span>
+          <span class="logo-text">WildRoam</span>
+        </a>
+        <p>Аренда домов на колёсах для тех, кто ценит свободу и комфорт.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 5L2 12.5l7 1.5m12-9l-5 14-5-5m10-9L9 14"/></svg>
+          </a>
+          <a href="#" aria-label="VK">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h4l3 6 3-4h5l2 2s-2 5-8 7H4"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Компания</h4>
+          <a href="#">О нас</a>
+          <a href="#">Блог</a>
+          <a href="#">Вакансии</a>
+          <a href="#">Пресса</a>
+        </div>
+        <div class="footer-col">
+          <h4>Сервис</h4>
+          <a href="#fleet">Автопарк</a>
+          <a href="#how">Как это работает</a>
+          <a href="#faq">FAQ</a>
+          <a href="#">Страхование</a>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+          <a href="mailto:hello@wildroam.ru">hello@wildroam.ru</a>
+          <a href="#">Москва, ул. Свободы, 1</a>
+          <a href="#">Пн–Вс: 08:00–22:00</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2025 WildRoam. Все права защищены.</span>
+        <span>
+          <a href="#">Политика конфиденциальности</a> ·
+          <a href="#">Договор оферты</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
